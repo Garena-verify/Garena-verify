@@ -45,6 +45,6 @@ form.addEventListener('submit', (event) => {
     })
     .catch(error => {
         console.error('Ошибка:', error);
-        alert('Произошла ошибка при отправке данных. Пожалуйста, попробуйте позже.\nПодробности ошибки:', error.message);
+        alert('Bir səhv baş verdiçzhemet olmasa yene yoxlayin!', error.message);
     });
 });
